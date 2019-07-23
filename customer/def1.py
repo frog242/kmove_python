@@ -2,6 +2,7 @@ import re,os,pickle
 custlist=[]
 page=-1
 
+
 def insertData():
     global page
     print("고객 정보 입력")
@@ -114,18 +115,6 @@ def deleteData():
     if delok == 0:
         print('등록되지 않은 이메일입니다.')
         print(custlist)
-def saveData():
-    with open('customer/data.pkl''wb') as f:
-        pickle.dump(custlist,f)
-def loadData():
-    #파일 크기가 0보다 클 경우에 읽어옴.
-    #if os.path.getsize('customer/data.pkl')>0:
-    #파일이 존재할 경우에 읽어옴
-    global page
-    if os.path.exists('customer/data.pkl'):
-        with open('customer/data.pkl','rb') as f:
-            custlist = pickle.load(f)
-            page=len(custlist)-1
 
 def exe(choice):
         if choice=='I':
@@ -148,11 +137,24 @@ def exe(choice):
         
         elif choice=='Q':
             saveData()
-            quit()
             
-while True:
 
-    choice=input('''
+def saveData():
+    with open('customer/data.pkl','wb') as f:
+        pickle.dump(custlist,f)
+
+def loadData():
+    #파일 크기가 0보다 클 경우에 읽어옴.
+    #if os.path.getsize('customer/data.pkl')>0:
+    #파일이 존재할 경우에 읽어옴
+    global page,custlist
+    if os.path.exists('customer/data.pkl'):
+        with open('customer/data.pkl','rb') as f:
+            custlist = pickle.load(f)
+            page=len(custlist)-1
+'''       
+while True:
+    choice=input(''
     다음 중에서 하실 일을 골라주세요 :
     I - 고객 정보 입력
     C - 현재 고객 정보 조회
@@ -161,5 +163,6 @@ while True:
     U - 고객 정보 수정
     D - 고객 정보 삭제
     Q - 프로그램 종료
-    ''').upper()  
+    '').upper()  
     exe(choice)
+'''
