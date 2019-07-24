@@ -136,7 +136,7 @@ def exe(choice):
             deleteData()
         
         elif choice=='Q':
-            saveData()
+            quit()
             
 
 def saveData():
@@ -152,6 +152,11 @@ def loadData():
         with open('customer/data.pkl','rb') as f:
             custlist = pickle.load(f)
             page=len(custlist)-1
+
+def quit():
+    saveData()
+    
+    
 '''       
 while True:
     choice=input(''
